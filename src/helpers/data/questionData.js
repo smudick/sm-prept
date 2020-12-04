@@ -30,8 +30,11 @@ const editQuestion = (questionObj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const deleteQuestion = (questionId) => axios.delete(`${baseUrl}${questionId}.json`);
+
 export default {
   getQuestions,
   newQuestion,
   editQuestion,
+  deleteQuestion,
 };

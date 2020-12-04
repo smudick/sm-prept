@@ -51,6 +51,18 @@ export default class FlashCard extends React.Component {
     });
   };
 
+  removeCard = (e) => {
+    const removedCard = this.state.flashCards.filter(
+      (flashCard) => flashCard.firebaseKey !== e.target.id,
+    );
+    this.setState({
+      flashCards: removedCard,
+    });
+    questionData.deleteQuestion(e.target.id).then(() => {
+      this.loadData();
+    });
+  };
+
   render() {
     const { answer, currentFlashCard } = this.state;
     const showQuestion = () => (
@@ -59,6 +71,7 @@ export default class FlashCard extends React.Component {
         card={currentFlashCard}
         showAnswer={this.showAnswerToQuestion}
         getUpdatedCard={this.getUpdatedCard}
+        removeCard = {this.removeCard}
       />
     );
     const showAnswer = () => (
@@ -67,6 +80,7 @@ export default class FlashCard extends React.Component {
         card={currentFlashCard}
         showNextQuestion={this.loadData}
         getUpdatedCard={this.getUpdatedCard}
+        removeCard = {this.removeCard}
       />
     );
     return (
