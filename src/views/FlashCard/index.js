@@ -38,6 +38,7 @@ export default class FlashCard extends React.Component {
     questionData.getQuestions().then((response) => {
       this.setState({
         flashCards: response,
+        currentFlashCard: response[0],
         answer: false,
       });
     });
